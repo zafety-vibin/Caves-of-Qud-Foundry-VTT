@@ -1,0 +1,28 @@
+{{!--
+  Developer Tab Container
+  GM-only tool panels for testing and content creation
+--}}
+
+<div class="dev-tools-container">
+
+  {{!-- Data Inspector Panel --}}
+  {{#if devTools.inspector}}
+    {{> "systems/cavesofqud/templates/tools/data-inspector.hbs" devTools.inspector}}
+  {{/if}}
+
+  {{!-- Calculation Breakdown Panel --}}
+  {{#if devTools.calculations}}
+    {{> "systems/cavesofqud/templates/tools/calc-viewer.hbs" devTools.calculations}}
+  {{/if}}
+
+  {{!-- Body Part Management Panel --}}
+  {{#if devTools.bodyParts}}
+    {{> "systems/cavesofqud/templates/tools/bodypart-crud.hbs" devTools.bodyParts}}
+  {{/if}}
+
+  {{!-- Quick Actions Panel --}}
+  {{#if devTools.quickActions}}
+    {{> "systems/cavesofqud/templates/tools/quick-actions.hbs" devTools.quickActions}}
+  {{/if}}
+
+</div>

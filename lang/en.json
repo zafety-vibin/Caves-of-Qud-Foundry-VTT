@@ -1,0 +1,37 @@
+{
+  "CAVESOFQUD.SystemName": "Caves of Qud",
+
+  "CAVESOFQUD.AttributeStrength": "Strength",
+  "CAVESOFQUD.AttributeAgility": "Agility",
+  "CAVESOFQUD.AttributeToughness": "Toughness",
+  "CAVESOFQUD.AttributeIntelligence": "Intelligence",
+  "CAVESOFQUD.AttributeWillpower": "Willpower",
+  "CAVESOFQUD.AttributeEgo": "Ego",
+
+  "CAVESOFQUD.AttributeStrengthAbbr": "STR",
+  "CAVESOFQUD.AttributeAgilityAbbr": "AGI",
+  "CAVESOFQUD.AttributeToughnessAbbr": "TOU",
+  "CAVESOFQUD.AttributeIntelligenceAbbr": "INT",
+  "CAVESOFQUD.AttributeWillpowerAbbr": "WIL",
+  "CAVESOFQUD.AttributeEgoAbbr": "EGO",
+
+  "CAVESOFQUD.Health": "Health",
+  "CAVESOFQUD.Level": "Level",
+  "CAVESOFQUD.CharacterType": "Character Type",
+
+  "CAVESOFQUD.DodgeValue": "Dodge Value (DV)",
+  "CAVESOFQUD.PenetrationValue": "Penetration Value (PV)",
+  "CAVESOFQUD.MentalArmor": "Mental Armor (MA)",
+  "CAVESOFQUD.ArmorValue": "Armor Value (AV)",
+
+  "CAVESOFQUD.CarryCapacity": "Carry Capacity",
+  "CAVESOFQUD.SkillPoints": "Skill Points",
+  "CAVESOFQUD.HPRegen": "HP Regeneration",
+  "CAVESOFQUD.CooldownReduction": "Cooldown Reduction",
+
+  "CAVESOFQUD.Mutant": "Mutant",
+  "CAVESOFQUD.TrueKin": "True Kin",
+
+  "CAVESOFQUD.SheetLabels.Actor": "Caves of Qud Actor Sheet",
+  "CAVESOFQUD.SheetLabels.Item": "Caves of Qud Item Sheet"
+}

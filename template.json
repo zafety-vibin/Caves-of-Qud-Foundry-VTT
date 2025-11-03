@@ -1,0 +1,172 @@
+{
+  "Actor": {
+    "types": ["character", "npc"],
+    "templates": {
+      "base": {
+        "attributes": {
+          "strength": {
+            "value": 16,
+            "mod": 0
+          },
+          "agility": {
+            "value": 16,
+            "mod": 0
+          },
+          "toughness": {
+            "value": 16,
+            "mod": 0
+          },
+          "intelligence": {
+            "value": 16,
+            "mod": 0
+          },
+          "willpower": {
+            "value": 16,
+            "mod": 0
+          },
+          "ego": {
+            "value": 16,
+            "mod": 0
+          }
+        },
+        "health": {
+          "value": 16,
+          "max": 16,
+          "hpHistory": [],
+          "lastDamageTurn": 0
+        },
+        "combat": {
+          "dv": 6,
+          "pv": 4,
+          "ma": 4,
+          "av": 0,
+          "mainHandId": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "characterType": "Mutant",
+        "skillPoints": {
+          "available": 0,
+          "spent": 0,
+          "total": 0
+        },
+        "carryCapacity": {
+          "max": 240,
+          "current": 0,
+          "overburdened": false
+        },
+        "hpRegen": {
+          "rate": 0.2,
+          "interruptedUntilTurn": 0
+        },
+        "cooldownReduction": {
+          "reductionPercent": 0,
+          "minimumCooldown": 5
+        },
+        "bodyParts": {},
+        "bodyRoot": ""
+      }
+    },
+    "character": {
+      "templates": ["base"],
+      "biography": "",
+      "notes": ""
+    },
+    "npc": {
+      "templates": ["base"],
+      "biography": "",
+      "faction": "",
+      "reputation": 0,
+      "statModifiers": {
+        "hp": 0,
+        "dv": 0,
+        "pv": 0,
+        "ma": 0,
+        "av": 0
+      }
+    }
+  },
+  "Item": {
+    "types": ["weapon", "armor", "mutation", "skill", "cybernetic", "artifact"],
+    "templates": {
+      "base": {
+        "description": "",
+        "weight": 0,
+        "value": 0
+      },
+      "physical": {
+        "quantity": 1,
+        "equipped": false
+      }
+    },
+    "weapon": {
+      "templates": ["base", "physical"],
+      "damage": "1d6",
+      "pv": 0,
+      "accuracy": 0,
+      "strengthCap": 0,
+      "weaponType": "melee"
+    },
+    "armor": {
+      "templates": ["base", "physical"],
+      "av": 0,
+      "dvModifier": 0,
+      "slot": "body"
+    },
+    "mutation": {
+      "templates": ["base"],
+      "mutationType": "physical",
+      "level": 1,
+      "mpCost": 0,
+      "cooldown": 0,
+      "effect": "",
+      "bodyModifications": [],
+      "addedBodyParts": [],
+      "isActive": false,
+      "naturalWeapon": {
+        "enabled": false,
+        "bodyPartTypes": [],
+        "weaponClass": "",
+        "damageFormula": "",
+        "pv": 0,
+        "attackChance": 100
+      },
+      "blockedEquipment": {},
+      "providesArmor": {
+        "enabled": false,
+        "bodyPartType": "",
+        "avFormula": ""
+      },
+      "resourceTracking": {
+        "enabled": false,
+        "resourceName": "",
+        "maxFormula": "",
+        "current": 0
+      },
+      "statBonuses": {
+        "carryCapacity": { "type": "flat", "value": 0, "formula": "" },
+        "movementSpeed": { "type": "percent", "value": 0, "formula": "" },
+        "quickness": { "type": "flat", "value": 0, "formula": "" }
+      }
+    },
+    "skill": {
+      "templates": ["base"],
+      "spCost": 0,
+      "prerequisites": "",
+      "effect": ""
+    },
+    "cybernetic": {
+      "templates": ["base"],
+      "slot": "",
+      "licenseTier": 0,
+      "installed": false
+    },
+    "artifact": {
+      "templates": ["base", "physical"],
+      "complexity": 0,
+      "identified": false,
+      "artifactType": "item"
+    }
+  }
+}

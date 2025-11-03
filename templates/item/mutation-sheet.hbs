@@ -1,0 +1,91 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+  <header class="sheet-header">
+    <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+    <div class="header-details">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{item.name}}" placeholder="Mutation Name"/>
+      </h1>
+    </div>
+  </header>
+
+  <section class="sheet-body">
+
+    <div class="form-group">
+      <label>Mutation Type</label>
+      <select name="system.mutationType">
+        <option value="physical" {{#if (eq system.mutationType "physical")}}selected{{/if}}>Physical</option>
+        <option value="mental" {{#if (eq system.mutationType "mental")}}selected{{/if}}>Mental</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>MP Cost</label>
+      <input type="number" name="system.mpCost" value="{{system.mpCost}}" data-dtype="Number"/>
+    </div>
+
+    <div class="form-group">
+      <label>Level</label>
+      <input type="number" name="system.level" value="{{system.level}}" data-dtype="Number"/>
+    </div>
+
+    <div class="form-group">
+      <label>Effect Description</label>
+      <textarea name="system.effect" rows="3">{{system.effect}}</textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      {{editor system.description target="system.description" button=true owner=owner editable=editable}}
+    </div>
+
+    {{#if system.naturalWeapon.enabled}}
+    <div class="form-group natural-weapon-info">
+      <label>Natural Weapon</label>
+      <div class="mutation-info-box">
+        <p><strong>Weapon Type:</strong> {{system.naturalWeapon.weaponClass}}</p>
+        <p><strong>Body Parts:</strong> {{system.naturalWeapon.bodyPartTypes}}</p>
+        <p><strong>Attack Chance:</strong> {{system.naturalWeapon.attackChance}}%</p>
+        <p><em>Damage scales with mutation level. Equipped weapons override natural weapons.</em></p>
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if system.providesArmor.enabled}}
+    <div class="form-group natural-armor-info">
+      <label>Natural Armor</label>
+      <div class="mutation-info-box">
+        <p><strong>Body Part:</strong> {{system.providesArmor.bodyPartType}}</p>
+        <p><em>Armor value scales with mutation level.</em></p>
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if system.resourceTracking.enabled}}
+    <div class="form-group resource-tracking-info">
+      <label>{{system.resourceTracking.resourceName}}</label>
+      <div class="mutation-info-box">
+        <p><strong>Current:</strong> {{system.resourceTracking.current}}</p>
+        <p><em>Resource scales with mutation level.</em></p>
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if system.isActive}}
+    <div class="mutation-actions">
+      <button type="button" class="mutation-remove-btn">
+        <i class="fas fa-times"></i> Remove Mutation
+      </button>
+      <div class="mutation-status">Status: <span class="active">ACTIVE</span></div>
+    </div>
+    {{else}}
+    <div class="mutation-actions">
+      <button type="button" class="mutation-apply-btn">
+        <i class="fas fa-plus"></i> Apply Mutation
+      </button>
+      <div class="mutation-status">Status: <span class="inactive">Inactive</span></div>
+    </div>
+    {{/if}}
+
+  </section>
+</form>

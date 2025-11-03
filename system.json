@@ -1,0 +1,62 @@
+{
+  "id": "cavesofqud",
+  "title": "Caves of Qud",
+  "description": "A game system for playing Caves of Qud in Foundry VTT, featuring the unique penetration-based combat system, hierarchical body parts, and mutant powers.",
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "11",
+    "verified": "13",
+    "maximum": "13"
+  },
+  "authors": [
+    {
+      "name": "Caves of Qud System Developer"
+    }
+  ],
+  "esmodules": [
+    "module/cavesofqud.mjs"
+  ],
+  "styles": [
+    "css/cavesofqud.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "packs": [
+    {
+      "name": "mutations",
+      "label": "Physical Mutations",
+      "path": "packs/mutations",
+      "type": "Item",
+      "system": "cavesofqud"
+    }
+  ],
+  "documentTypes": {
+    "Actor": {
+      "character": {},
+      "npc": {}
+    },
+    "Item": {
+      "weapon": {},
+      "armor": {},
+      "mutation": {},
+      "skill": {},
+      "cybernetic": {},
+      "artifact": {}
+    }
+  },
+  "socket": false,
+  "initiative": "1d20 + @attributes.agility.mod",
+  "grid": {
+    "distance": 5,
+    "units": "ft"
+  },
+  "primaryTokenAttribute": "health",
+  "url": "https://github.com/yourusername/cavesofqud-foundry",
+  "manifest": "https://github.com/yourusername/cavesofqud-foundry/releases/latest/download/system.json",
+  "download": "https://github.com/yourusername/cavesofqud-foundry/archive/refs/heads/main.zip"
+}

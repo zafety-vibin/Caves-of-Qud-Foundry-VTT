@@ -1,0 +1,35 @@
+# Node modules (if using npm for development tools)
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment files
+.env
+.env.local
+.env*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Foundry VTT specific
+packs/
+*.db
+
+# Development
+*.bak
+*.old

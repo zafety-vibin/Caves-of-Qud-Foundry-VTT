@@ -1,0 +1,72 @@
+{{!--
+  Data Inspector Panel
+  Shows raw actor data and calculated values for GM debugging
+--}}
+
+<details class="dev-panel" open>
+  <summary>
+    <i class="fas fa-search"></i> Data Inspector
+  </summary>
+
+  <div class="dev-panel-content">
+
+    {{!-- Raw System Data --}}
+    <h4>Raw System Data</h4>
+    <pre class="dev-code">{{rawData}}</pre>
+
+    {{!-- Calculated Values --}}
+    <h4>Calculated Values</h4>
+    {{#each calculations}}
+      <div class="calc-category">
+        <h5>{{category}}</h5>
+        <table class="dev-table">
+          <thead>
+            <tr>
+              <th>Stat</th>
+              <th>Value</th>
+              <th>Formula</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each stats}}
+              <tr>
+                <td><strong>{{label}}</strong></td>
+                <td>{{value}}{{#if modifier}} ({{#if (gt modifier 0)}}+{{/if}}{{modifier}}){{/if}}</td>
+                <td class="formula">{{formula}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    {{/each}}
+
+    {{!-- Active Mutations --}}
+    {{#if activeMutations.length}}
+      <h4>Active Mutations</h4>
+      <table class="dev-table">
+        <thead>
+          <tr>
+            <th>Mutation</th>
+            <th>Level</th>
+            <th>Effects</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each activeMutations}}
+            <tr>
+              <td><strong>{{name}}</strong></td>
+              <td>{{level}}</td>
+              <td>
+                {{#if hasNaturalWeapon}}🗡️ Natural Weapon{{/if}}
+                {{#if providesArmor}}🛡️ Armor{{/if}}
+                {{#if blocksEquipment}}🚫 Blocks Equipment{{/if}}
+                {{#if bodyPartsAdded}}➕ {{bodyPartsAdded}} body parts{{/if}}
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{/if}}
+
+  </div>
+</details>

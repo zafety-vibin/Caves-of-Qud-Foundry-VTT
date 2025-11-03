@@ -1,0 +1,84 @@
+<div class="chat-card combat-card">
+  <div class="card-header">
+    <h3>{{attackerName}} attacks {{targetName}}!</h3>
+  </div>
+
+  <div class="card-content">
+    {{#if mainHands.length}}
+      <div class="main-hand-attacks">
+        <h4>Main Hand</h4>
+        {{#each mainHands}}
+          <div class="attack-hand {{#if hit}}hit{{else}}miss{{/if}}">
+            <div class="hand-name">{{name}}</div>
+            <div class="to-hit">To Hit: {{toHit}} {{#if hit}}✓ HIT{{else}}✗ MISS{{/if}}</div>
+            {{#if hit}}
+              <div class="weapon-pv">Weapon PV: {{weaponPV}}</div>
+              {{#if (gt penetrations 0)}}
+                <div class="penetrations">Penetrations: {{penetrations}}</div>
+                <div class="damage">Damage: {{damage}}</div>
+
+                {{#if tripletDetails.length}}
+                  <details class="triplet-details">
+                    <summary>Penetration Details ({{tripletDetails.length}} triplet{{#if (gt tripletDetails.length 1)}}s{{/if}})</summary>
+                    <div class="triplet-breakdown">
+                      {{#each tripletDetails}}
+                        <div class="triplet {{#if passed}}triplet-pass{{else}}triplet-fail{{/if}}">
+                          <div class="triplet-header">Triplet {{tripletNumber}}: PV {{pv}} vs AV {{av}} (target: {{targetNumber}})</div>
+                          <div class="singlets">
+                            {{#each singlets}}
+                              <div class="singlet {{#if succeeded}}singlet-success{{else}}singlet-fail{{/if}}">
+                                <span class="singlet-label">Singlet {{@index}}:</span>
+                                <span class="singlet-rolls">{{rolls}}</span>
+                                <span class="singlet-total">({{finalTotal}})</span>
+                                {{#if exploded}}
+                                  <span class="explosion-badge">💥</span>
+                                {{/if}}
+                                {{#if succeeded}}✓{{else}}✗{{/if}}
+                              </div>
+                            {{/each}}
+                          </div>
+                        </div>
+                      {{/each}}
+                    </div>
+                  </details>
+                {{/if}}
+              {{else}}
+                <div class="no-penetration">No penetration - armor blocked attack</div>
+              {{/if}}
+            {{/if}}
+          </div>
+        {{/each}}
+      </div>
+    {{/if}}
+
+    {{#if offhands.length}}
+      <div class="offhand-attacks">
+        <h4>Offhand Attacks</h4>
+        {{#each offhands}}
+          <div class="attack-hand offhand">
+            <div class="hand-name">{{name}}</div>
+            <div class="percent-check">{{percentCheck}}</div>
+            {{#if triggered}}
+              {{#if hit}}
+                <div class="to-hit">To Hit: {{toHit}} ✓ HIT</div>
+                <div class="weapon-pv">Weapon PV: {{weaponPV}}</div>
+                {{#if (gt penetrations 0)}}
+                  <div class="damage">Damage: {{damage}}</div>
+                {{else}}
+                  <div class="no-penetration">No penetration</div>
+                {{/if}}
+              {{else}}
+                <div class="to-hit">To Hit: {{toHit}} ✗ MISS</div>
+              {{/if}}
+            {{/if}}
+          </div>
+        {{/each}}
+      </div>
+    {{/if}}
+  </div>
+
+  <div class="card-footer">
+    <div class="total-damage"><strong>Total Damage:</strong> {{totalDamage}}</div>
+    <div class="hp-change"><strong>HP:</strong> {{hpChange}}</div>
+  </div>
+</div>

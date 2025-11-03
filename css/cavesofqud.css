@@ -1,0 +1,1209 @@
+/**
+ * Caves of Qud System Stylesheet
+ * Readable terminal aesthetic - dark gray with green accents
+ */
+
+/* ========================================= */
+/* Global Styles                             */
+/* ========================================= */
+
+.cavesofqud {
+  font-family: 'Courier New', Courier, monospace;
+  background: #1a1a1a !important;
+  color: #e0e0e0;
+  border: 1px solid #00aa00;
+  display: flex;
+  flex-direction: column;
+  max-height: auto;
+}
+
+.cavesofqud .window-content {
+  background: #1a1a1a !important;
+  color: #e0e0e0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.cavesofqud form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cavesofqud label {
+  color: #e0e0e0;
+}
+
+.cavesofqud input,
+.cavesofqud select,
+.cavesofqud textarea {
+  font-family: 'Courier New', Courier, monospace;
+  background: #2a2a2a;
+  color: #e0e0e0;
+  border: 1px solid #00aa00;
+  padding: 4px 8px;
+}
+
+.cavesofqud input:focus,
+.cavesofqud select:focus,
+.cavesofqud textarea:focus {
+  outline: none;
+  border-color: #00ff00;
+}
+
+.cavesofqud h1,
+.cavesofqud h2,
+.cavesofqud h3,
+.cavesofqud h4 {
+  color: #00ff00;
+}
+
+/* ========================================= */
+/* Sheet Header                              */
+/* ========================================= */
+
+.cavesofqud .sheet-header {
+  background: #1a1a1a;
+  padding: 1px;
+  max-height: fit-content;
+  flex-shrink: 0;
+}
+
+.cavesofqud .header-fields {
+  display: flex;
+  gap: 1px;
+  align-items: center;
+}
+
+.cavesofqud.sheet.actor.character .profile-img {
+  flex: 0 0 40px;
+  border: 1px solid #00aa00;
+}
+
+.cavesofqud.sheet.actor.npc .profile-img {
+  flex: 0 0 30px;
+  border: 1px solid #00aa00;
+}
+
+.cavesofqud .profile-img img {
+  width: 256px;
+  height: 256px;
+  object-fit: cover;
+}
+
+.cavesofqud .header-details {
+  flex: 1;
+}
+
+.cavesofqud .charname input {
+  font-size: 18px;
+  font-weight: bold;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #00aa00;
+  width: 100%;
+  color: #00ff00;
+}
+
+.cavesofqud .resource {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 3px;
+}
+
+.cavesofqud .resource-label {
+  font-weight: bold;
+  min-width: 80px;
+  color: #e0e0e0;
+}
+
+.cavesofqud .resource input,
+.cavesofqud .resource select {
+  width: 100px;
+  text-align: center;
+}
+
+.cavesofqud .resource .sep {
+  padding: 0 5px;
+  color: #e0e0e0;
+}
+
+.cavesofqud .health-max {
+  font-weight: bold;
+  color: #00ff00;
+}
+
+/* ========================================= */
+/* Tabs                                      */
+/* ========================================= */
+
+.cavesofqud .sheet-tabs {
+  background: #1a1a1a;
+  display: flex;
+  gap: 0;
+  flex-shrink: 0;
+  padding: 0;        
+  margin: 0;         
+  max-height: fit-content;
+  border: 1px solid #00aa00;
+}
+
+.cavesofqud .sheet-tabs .item {
+  flex: 1;
+  text-align: center;
+  padding: 12px 28px;
+  background: #2a2a2a;
+  border: 1px solid #00aa00;
+  color: #e0e0e0;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.2s;
+  font-size: 13px;
+}
+
+.cavesofqud .sheet-tabs .item:hover {
+  background: #3a3a3a;
+  color: #00ff00;
+}
+
+.cavesofqud .sheet-tabs .item.active {
+  background: #1a1a1a;
+  color: #00ff00;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+/* ========================================= */
+/* Sheet Body                                */
+/* ========================================= */
+
+.cavesofqud .sheet-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0px;
+  background: #1a1a1a !important;
+  color: #e0e0e0;
+  min-height: 0;
+}
+
+.cavesofqud .sheet-body .tab {
+  display: none;
+  background: #1a1a1a;
+  height: 100%;
+}
+
+.cavesofqud .sheet-body .tab.active {
+  display: block;
+  background: #1a1a1a;
+  height: 100%;
+}
+
+.cavesofqud .section-title {
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0px 0 5px 0;
+  padding: 0px;
+  border-top: 1px solid #00aa00;
+  border-bottom: 1px solid #00aa00;
+  background: #2a2a2a;
+  color: #00ff00;
+}
+
+/* ========================================= */
+/* Attributes                                */
+/* ========================================= */
+
+.cavesofqud .attributes-section {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.cavesofqud .attributes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.cavesofqud .attribute-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 8px;
+  background: #2a2a2a;
+  border: 1px solid #00aa00;
+}
+
+.cavesofqud .attribute-label {
+  flex: 1;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 13px;
+  color: #e0e0e0;
+}
+
+.cavesofqud .attribute-value {
+  width: 60px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.cavesofqud .attribute-mod {
+  width: 50px;
+  text-align: center;
+  font-weight: bold;
+  padding: 6px;
+  background: #3a3a3a;
+  border: 1px solid #00aa00;
+  color: #00ff00;
+  font-size: 14px;
+  cursor: help;
+}
+
+/* ========================================= */
+/* Combat Stats                              */
+/* ========================================= */
+
+.cavesofqud .combat-stats-section {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.cavesofqud .combat-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.cavesofqud .combat-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  background: #2a2a2a;
+  border: 1px solid #00aa00;
+  cursor: help;
+  position: relative;
+}
+
+.cavesofqud .stat-breakdown-indicator {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  font-size: 10px;
+  opacity: 0.6;
+}
+
+.cavesofqud .combat-stat label {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #e0e0e0;
+}
+
+.cavesofqud .combat-stat .stat-value {
+  font-weight: bold;
+  font-size: 18px;
+  padding: 4px 12px;
+  background: #3a3a3a;
+  border: 1px solid #00aa00;
+  color: #00ff00;
+}
+
+/* ========================================= */
+/* Derived Stats                             */
+/* ========================================= */
+
+.cavesofqud .derived-stats-section {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.cavesofqud .derived-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.cavesofqud .derived-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  background: #2a2a2a;
+  border: 1px solid #00aa00;
+  cursor: help;
+}
+
+.cavesofqud .derived-stat label {
+  font-weight: bold;
+  font-size: 12px;
+  color: #e0e0e0;
+}
+
+.cavesofqud .derived-stat .stat-value {
+  font-size: 14px;
+  color: #e0e0e0;
+}
+
+.cavesofqud .overburdened-indicator {
+  color: #ff4444;
+  font-weight: bold;
+  font-size: 12px;
+  margin-left: 10px;
+}
+
+/* ========================================= */
+/* Utility Classes                           */
+/* ========================================= */
+
+.cavesofqud .flexrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cavesofqud .flexcol {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ========================================= */
+/* Inventory                                 */
+/* ========================================= */
+
+.cavesofqud .inventory-section {
+  margin-top: 10px;
+  padding: 5px;
+}
+
+.cavesofqud .inventory-section h4 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  margin: 10px 0 5px 0;
+  border-bottom: 1px solid #00aa00;
+  color: #00ff00;
+  font-size: 14px;
+}
+
+.cavesofqud .item-create {
+  cursor: pointer;
+  color: #00ff00;
+  font-size: 14px;
+}
+
+.cavesofqud .item-create:hover {
+  color: #00ff00;
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.8);
+}
+
+.cavesofqud .items-list {
+  margin-bottom: 15px;
+}
+
+.cavesofqud .item-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  margin: 3px 0;
+  background: #2a2a2a;
+  border: 1px solid #00aa00;
+  transition: all 0.2s;
+}
+
+.cavesofqud .item-row:hover {
+  background: #3a3a3a;
+}
+
+.cavesofqud .item-row .item-name {
+  flex: 1;
+  color: #e0e0e0;
+  font-weight: bold;
+}
+
+.cavesofqud .item-row .item-stat {
+  padding: 2px 6px;
+  background: #3a3a3a;
+  border: 1px solid #00aa00;
+  color: #00ff00;
+  font-size: 11px;
+}
+
+.cavesofqud .item-control {
+  cursor: pointer;
+  padding: 2px 6px;
+  color: #e0e0e0;
+  border: 1px solid #00aa00;
+  background: #3a3a3a;
+}
+
+.cavesofqud .item-control:hover {
+  background: #4a4a4a;
+  color: #00ff00;
+}
+
+/* ========================================= */
+/* Item Sheets                               */
+/* ========================================= */
+
+.cavesofqud.sheet.item {
+  background: #1a1a1a;
+}
+
+.cavesofqud.sheet.item .sheet-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  border-bottom: 1px solid #00aa00;
+}
+
+.cavesofqud.sheet.item .sheet-header img {
+  border: 1px solid #00aa00;
+}
+
+.cavesofqud.sheet.item .header-details {
+  flex: 1;
+}
+
+.cavesofqud.sheet.item .charname input {
+  font-size: 20px;
+  font-weight: bold;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #00aa00;
+  width: 100%;
+  color: #00ff00;
+}
+
+.cavesofqud.sheet.item .sheet-body {
+  padding: 10px;
+  background: #1a1a1a;
+}
+
+.cavesofqud.sheet.item .form-group {
+  margin-bottom: 15px;
+}
+
+.cavesofqud.sheet.item .form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #e0e0e0;
+  font-size: 12px;
+}
+
+.cavesofqud.sheet.item .form-group input,
+.cavesofqud.sheet.item .form-group select,
+.cavesofqud.sheet.item .form-group textarea {
+  width: 100%;
+}
+
+/* ========================================= */
+/* Mutations                                 */
+/* ========================================= */
+
+.cavesofqud .mutations-section {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.cavesofqud .mutation-row {
+  position: relative;
+}
+
+.cavesofqud .mutation-active {
+  padding: 2px 8px;
+  background: #005500;
+  border: 1px solid #00ff00;
+  color: #00ff00;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.cavesofqud .mutation-actions {
+  margin-top: 15px;
+  padding: 10px;
+  background: #2a2a2a;
+  border: 1px solid #00aa00;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cavesofqud .mutation-apply-btn,
+.cavesofqud .mutation-remove-btn {
+  padding: 10px 20px;
+  background: #3a3a3a;
+  border: 2px solid #00aa00;
+  color: #00ff00;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.cavesofqud .mutation-apply-btn:hover {
+  background: #005500;
+  border-color: #00ff00;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.cavesofqud .mutation-remove-btn {
+  background: #3a1a1a;
+  border-color: #aa0000;
+  color: #ff4444;
+}
+
+.cavesofqud .mutation-remove-btn:hover {
+  background: #550000;
+  border-color: #ff0000;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.cavesofqud .mutation-status {
+  text-align: center;
+  padding: 5px;
+  font-size: 12px;
+}
+
+.cavesofqud .mutation-status .active {
+  color: #00ff00;
+  font-weight: bold;
+}
+
+.cavesofqud .mutation-status .inactive {
+  color: #777777;
+  font-style: italic;
+}
+
+.cavesofqud .qud-mutation-message {
+  font-family: 'Courier New', Courier, monospace;
+  color: #00ff00;
+  background: #001100;
+  border: 1px solid #00aa00;
+  padding: 8px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* ========================================= */
+/* Body Parts Tree                           */
+/* ========================================= */
+
+.cavesofqud .body-parts-section {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.cavesofqud .body-parts-tree {
+  background: #2a2a2a;
+  border: 1px solid #00aa00;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.cavesofqud .body-part-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  margin: 3px 0;
+  background: #1a1a1a;
+  border-left: 2px solid #00aa00;
+  transition: all 0.2s;
+}
+
+.cavesofqud .body-part-row:hover {
+  background: #3a3a3a;
+}
+
+.cavesofqud .body-part-row.chimera-part {
+  border-left-color: #aa00aa;
+  background: #1a1a2a;
+}
+
+.cavesofqud .body-part-row.chimera-part:hover {
+  background: #2a2a3a;
+}
+
+.cavesofqud .chimera-badge {
+  margin-left: 5px;
+  font-size: 12px;
+  cursor: help;
+}
+
+.cavesofqud .body-part-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.cavesofqud .body-part-icon {
+  width: 16px;
+  font-size: 12px;
+  color: #00ff00;
+  font-weight: bold;
+}
+
+.cavesofqud .body-part-name {
+  font-weight: bold;
+  font-size: 14px;
+  color: #e0e0e0;
+}
+
+.cavesofqud .body-part-type {
+  font-size: 11px;
+  color: #999999;
+  font-style: italic;
+}
+
+.cavesofqud .body-part-equipment {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cavesofqud .equipped-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  background: #3a3a3a;
+  border: 1px solid #00aa00;
+  font-size: 12px;
+  color: #e0e0e0;
+}
+
+.cavesofqud .equipped-item img {
+  border: 1px solid #00aa00;
+}
+
+.cavesofqud .equipped-item .item-name {
+  color: #e0e0e0;
+}
+
+.cavesofqud .equipped-item .item-stat {
+  color: #00ff00;
+  font-weight: bold;
+  margin-left: 4px;
+}
+
+.cavesofqud .empty-slot {
+  font-size: 12px;
+  color: #777777;
+  font-style: italic;
+  padding: 3px 8px;
+  border: 1px dashed #555555;
+  background: #2a2a2a;
+}
+
+/* ========================================= */
+/* NPC Stat Modifiers                        */
+/* ========================================= */
+
+.cavesofqud .combat-stat-npc {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 6px 8px;
+  background: #2a2a2a;
+  border: 1px solid #00aa00;
+}
+
+.cavesofqud .combat-stat-npc label {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #e0e0e0;
+  margin-bottom: 5px;
+}
+
+.cavesofqud .stat-breakdown {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+}
+
+.cavesofqud .stat-base {
+  font-size: 14px;
+  color: #999999;
+  font-style: italic;
+}
+
+.cavesofqud .stat-plus,
+.cavesofqud .stat-equals {
+  font-size: 12px;
+  color: #666666;
+}
+
+.cavesofqud .stat-modifier {
+  width: 50px;
+  text-align: center;
+  font-weight: bold;
+  background: #3a3a3a;
+  border: 1px solid #00aa00;
+  color: #ffaa00;
+  padding: 2px 4px;
+}
+
+.cavesofqud .stat-final {
+  font-weight: bold;
+  font-size: 16px;
+  color: #00ff00;
+  padding: 2px 8px;
+  background: #3a3a3a;
+  border: 1px solid #00aa00;
+}
+
+/* ========================================= */
+/* Scrollbars                                */
+/* ========================================= */
+
+.cavesofqud ::-webkit-scrollbar {
+  width: 12px;
+  background: #1a1a1a;
+  border-left: 1px solid #00aa00;
+}
+
+.cavesofqud ::-webkit-scrollbar-thumb {
+  background: #3a3a3a;
+  border: 1px solid #00aa00;
+}
+
+.cavesofqud ::-webkit-scrollbar-thumb:hover {
+  background: #4a4a4a;
+}
+
+/* ========================================= */
+/* Combat System                             */
+/* ========================================= */
+
+/* Attack buttons on equipped weapons */
+.cavesofqud .attack-button {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 11px;
+  background: #2a2a2a;
+  color: #ff6600;
+  border: 1px solid #ff6600;
+  padding: 2px 8px;
+  margin-left: 8px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+
+.cavesofqud .attack-button:hover {
+  background: #ff6600;
+  color: #1a1a1a;
+  border-color: #ff8800;
+  box-shadow: 0 0 5px #ff6600;
+}
+
+.cavesofqud .attack-button i {
+  margin-right: 4px;
+}
+
+/* Main hand designation button */
+.cavesofqud .set-main-hand {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 11px;
+  background: #2a2a2a;
+  color: #ffaa00;
+  border: 1px solid #ffaa00;
+  padding: 2px 8px;
+  margin-left: 8px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+
+.cavesofqud .set-main-hand:hover {
+  background: #ffaa00;
+  color: #1a1a1a;
+  border-color: #ffcc00;
+  box-shadow: 0 0 5px #ffaa00;
+}
+
+.cavesofqud .set-main-hand.active {
+  background: #ffaa00;
+  color: #1a1a1a;
+  border-color: #ffcc00;
+  box-shadow: 0 0 8px #ffaa00;
+  font-weight: bold;
+}
+
+.cavesofqud .set-main-hand i {
+  font-size: 12px;
+}
+
+/* Combat chat message cards */
+.chat-card.combat-card {
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #00aa00;
+  border-radius: 5px;
+  padding: 8px;
+  margin: 4px 0;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.combat-card .card-header {
+  background: linear-gradient(to bottom, rgba(0, 170, 0, 0.1), transparent);
+  padding: 8px;
+  border-radius: 5px 5px 0 0;
+  margin-bottom: 8px;
+}
+
+.combat-card .card-header h3 {
+  margin: 0;
+  color: #000000;
+  font-size: 14px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.combat-card .card-content {
+  padding: 8px;
+}
+
+.combat-card .main-hand-attacks h4,
+.combat-card .offhand-attacks h4 {
+  color: #000000;
+  font-size: 12px;
+  margin: 8px 0 4px 0;
+  text-transform: uppercase;
+  border-bottom: 1px solid #00aa00;
+  padding-bottom: 2px;
+  font-weight: bold;
+}
+
+.combat-card .attack-hand {
+  margin: 8px 0;
+  padding: 8px;
+  background: #f5f5f5;
+  border-left: 3px solid #00aa00;
+  border-radius: 3px;
+}
+
+.combat-card .attack-hand.hit {
+  border-left-color: #00aa00;
+  background: #e8f5e8;
+}
+
+.combat-card .attack-hand.miss {
+  border-left-color: #aa0000;
+  background: #f5e8e8;
+}
+
+.combat-card .hand-name {
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 4px;
+}
+
+.combat-card .to-hit,
+.combat-card .penetrations,
+.combat-card .damage {
+  margin: 2px 0;
+  padding-left: 8px;
+  font-size: 12px;
+  color: #000000;
+}
+
+.combat-card .to-hit {
+  color: #000000;
+}
+
+.combat-card .penetrations {
+  color: #000000;
+}
+
+.combat-card .damage {
+  color: #000000;
+  font-weight: bold;
+}
+
+.combat-card .no-penetration {
+  color: #aa0000;
+  font-style: italic;
+  padding-left: 8px;
+}
+
+.combat-card .percent-check {
+  color: #000000;
+  font-size: 11px;
+  padding-left: 8px;
+}
+
+.combat-card .offhand {
+  border-left-color: #0066aa;
+}
+
+.combat-card .card-footer {
+  padding: 8px;
+  border-top: 1px solid #00aa00;
+  margin-top: 8px;
+}
+
+.combat-card .total-damage {
+  color: #000000;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  margin: 4px 0;
+}
+
+.combat-card .hp-change {
+  color: #000000;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Triplet details (expandable penetration breakdown) */
+.combat-card .triplet-details {
+  margin-top: 8px;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid #00aa00;
+  border-radius: 3px;
+}
+
+.combat-card .triplet-details summary {
+  cursor: pointer;
+  font-size: 11px;
+  color: #000000;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 4px;
+}
+
+.combat-card .triplet-details summary:hover {
+  color: #000000;
+  background: rgba(0, 170, 0, 0.1);
+}
+
+.combat-card .triplet-breakdown {
+  margin-top: 8px;
+}
+
+.combat-card .triplet {
+  margin: 8px 0;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 3px solid #aaaaaa;
+  border-radius: 3px;
+}
+
+.combat-card .triplet.triplet-pass {
+  border-left-color: #00ff00;
+}
+
+.combat-card .triplet.triplet-fail {
+  border-left-color: #aa0000;
+}
+
+.combat-card .triplet-header {
+  font-size: 11px;
+  color: #000000;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+.combat-card .singlets {
+  padding-left: 12px;
+}
+
+.combat-card .singlet {
+  font-size: 11px;
+  margin: 2px 0;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #000000;
+}
+
+.combat-card .singlet-label {
+  color: #000000;
+  min-width: 60px;
+}
+
+.combat-card .singlet-rolls {
+  color: #000000;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+
+.combat-card .singlet-total {
+  color: #000000;
+}
+
+.combat-card .singlet.singlet-success {
+  font-weight: bold;
+}
+
+.combat-card .singlet.singlet-fail {
+  opacity: 0.6;
+}
+
+.combat-card .explosion-badge {
+  font-size: 14px;
+}
+
+/* ========================================= */
+/* Natural Weapons & Armor (F005)            */
+/* ========================================= */
+
+.cavesofqud .natural-weapon-item {
+  background: rgba(255, 170, 0, 0.1);
+  border-left: 3px solid #ffaa00;
+}
+
+.cavesofqud .natural-armor-badge,
+.cavesofqud .wings-badge {
+  font-size: 11px;
+  padding: 2px 6px;
+  margin-left: 8px;
+  background: #3a3a3a;
+  border: 1px solid #00aa00;
+  border-radius: 3px;
+  color: #00ff00;
+}
+
+.cavesofqud .wings-badge {
+  border-color: #00aaff;
+  color: #00aaff;
+}
+
+/* ========================================= */
+/* Developer Tools (F006) - GM Only         */
+/* ========================================= */
+
+.cavesofqud .tab.developer,
+.cavesofqud .developer-section {
+  padding: 10px;
+}
+
+.cavesofqud .dev-intro {
+  color: #ffaa00;
+  font-style: italic;
+  margin-bottom: 15px;
+  text-align: center;
+  padding: 8px;
+  background: rgba(255, 170, 0, 0.1);
+  border: 1px solid #ffaa00;
+  border-radius: 3px;
+}
+
+.cavesofqud .dev-tools-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.cavesofqud .dev-panel {
+  background: #2a2a2a;
+  border: 1px solid #00aa00;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.cavesofqud .dev-panel summary {
+  cursor: pointer;
+  font-weight: bold;
+  color: #00ff00;
+  padding: 5px;
+  user-select: none;
+}
+
+.cavesofqud .dev-panel summary:hover {
+  background: rgba(0, 170, 0, 0.2);
+}
+
+.cavesofqud .dev-panel-content {
+  margin-top: 10px;
+  padding: 10px;
+  background: #1a1a1a;
+  border-top: 1px solid #00aa00;
+}
+
+.cavesofqud .dev-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.cavesofqud .dev-table th {
+  text-align: left;
+  padding: 5px;
+  background: #3a3a3a;
+  border: 1px solid #00aa00;
+  color: #00ff00;
+}
+
+.cavesofqud .dev-table td {
+  padding: 5px;
+  border: 1px solid #00aa00;
+  color: #e0e0e0;
+}
+
+.cavesofqud .dev-table .formula {
+  font-family: 'Courier New', Courier, monospace;
+  color: #ffaa00;
+  font-size: 11px;
+}
+
+.cavesofqud .dev-code {
+  background: #1a1a1a;
+  border: 1px solid #00aa00;
+  padding: 10px;
+  overflow-x: auto;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 11px;
+  color: #00ff00;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.cavesofqud .dev-placeholder {
+  text-align: center;
+  color: #aaaaaa;
+  font-style: italic;
+  padding: 20px;
+}
+
+/* Data Inspector Specific */
+.cavesofqud .calc-category {
+  margin-bottom: 15px;
+}
+
+.cavesofqud .calc-category h5 {
+  color: #00ff00;
+  margin: 10px 0 5px 0;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.cavesofqud .dev-code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.cavesofqud .dev-table tbody tr:nth-child(even) {
+  background: rgba(0, 170, 0, 0.05);
+}
+
+.cavesofqud .dev-table tbody tr:hover {
+  background: rgba(0, 170, 0, 0.15);
+}

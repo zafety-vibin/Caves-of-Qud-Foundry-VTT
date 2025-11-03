@@ -1,0 +1,380 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+  {{!-- Sheet Header --}}
+  <header class="sheet-header">
+    <div class="header-fields">
+      <div class="profile-img">
+        <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="80" width="80"/>
+      </div>
+
+      <div class="header-details">
+        <h1 class="charname">
+          <input name="name" type="text" value="{{actor.name}}" placeholder="Character Name"/>
+        </h1>
+
+        <div class="resource">
+          <label class="resource-label">Level</label>
+          <input type="text" name="system.level.value" value="{{system.level.value}}" data-dtype="Number"/>
+        </div>
+
+        <div class="resource">
+          <label class="resource-label">Type</label>
+          <select name="system.characterType">
+            <option value="Mutant" {{#if (eq system.characterType "Mutant")}}selected{{/if}}>Mutant</option>
+            <option value="TrueKin" {{#if (eq system.characterType "TrueKin")}}selected{{/if}}>True Kin</option>
+          </select>
+        </div>
+
+        <div class="resource health">
+          <label class="resource-label">HP</label>
+          <input type="text" name="system.health.value" value="{{system.health.value}}" data-dtype="Number"/>
+          <span class="sep">/</span>
+          <span class="health-max">{{system.health.max}}</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {{!-- Sheet Tab Navigation --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="stats">Stats</a>
+    <a class="item" data-tab="equipment">Equipment</a>
+    <a class="item" data-tab="abilities">Abilities</a>
+    <a class="item" data-tab="biography">Biography</a>
+    {{#if isGM}}
+      <a class="item" data-tab="developer">Developer</a>
+    {{/if}}
+  </nav>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+
+    {{!-- Stats Tab --}}
+    <div class="tab stats" data-group="primary" data-tab="stats">
+
+      {{!-- Attributes --}}
+      <div class="attributes-section">
+        <h3 class="section-title">═══ ATTRIBUTES ═══</h3>
+
+        <div class="attributes-grid">
+          {{#each system.attributes as |attr key|}}
+          <div class="attribute-row" data-attribute="{{key}}">
+            <label class="attribute-label">{{key}}</label>
+            <input type="text" name="system.attributes.{{key}}.value" value="{{attr.value}}" data-dtype="Number" class="attribute-value"/>
+            <div class="attribute-mod" title="Modifier: ({{attr.value}} - 16) / 2 = {{attr.mod}}">
+              {{#if (gt attr.mod 0)}}+{{/if}}{{attr.mod}}
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+
+      {{!-- Combat Stats --}}
+      <div class="combat-stats-section">
+        <h3 class="section-title">═══ COMBAT STATS ═══</h3>
+
+        <div class="combat-stats-grid">
+          <div class="combat-stat" title="Dodge Value: 6 + AGI modifier ({{system.attributes.agility.mod}}){{#if equipmentBreakdown.dv.length}} + Equipment{{/if}} = {{system.combat.dv}}{{#if equipmentBreakdown.dv.length}}&#10;&#10;Equipment:&#10;{{#each equipmentBreakdown.dv}}{{this}}&#10;{{/each}}{{/if}}">
+            <label>DV (Dodge)</label>
+            <span class="stat-value">{{system.combat.dv}}</span>
+          </div>
+
+          <div class="combat-stat" title="Penetration Value: 4 + STR modifier ({{system.attributes.strength.mod}}) = {{system.combat.pv}}">
+            <label>PV (Penetration)</label>
+            <span class="stat-value">{{system.combat.pv}}</span>
+          </div>
+
+          <div class="combat-stat" title="Mental Armor: 4 + WIL modifier ({{system.attributes.willpower.mod}}) = {{system.combat.ma}}">
+            <label>MA (Mental)</label>
+            <span class="stat-value">{{system.combat.ma}}</span>
+          </div>
+
+          <div class="combat-stat" title="Armor Value from equipped gear{{#if equipmentBreakdown.av.length}}:&#10;&#10;{{#each equipmentBreakdown.av}}{{this}}&#10;{{/each}}&#10;Total: {{system.combat.av}}{{/if}}">
+            <label>AV (Armor)</label>
+            <span class="stat-value">{{system.combat.av}}</span>
+            {{#if equipmentBreakdown.av.length}}
+              <div class="stat-breakdown-indicator">📋</div>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+
+      {{!-- Derived Stats --}}
+      <div class="derived-stats-section">
+        <h3 class="section-title">═══ OTHER STATS ═══</h3>
+
+        <div class="derived-stats-grid">
+          <div class="derived-stat" title="Carry Capacity: 15 × STR ({{system.attributes.strength.value}}) = {{system.carryCapacity.max}} lbs">
+            <label>Carry Capacity</label>
+            <span class="stat-value">{{system.carryCapacity.current}} / {{system.carryCapacity.max}} lbs</span>
+            {{#if system.carryCapacity.overburdened}}
+              <span class="overburdened-indicator">OVERBURDENED!</span>
+            {{/if}}
+          </div>
+
+          <div class="derived-stat" title="Skill points available to spend on skills">
+            <label>Skill Points</label>
+            <span class="stat-value">{{system.skillPoints.available}} available ({{system.skillPoints.total}} total)</span>
+          </div>
+
+          <div class="derived-stat" title="HP Regeneration: (20 + 2×(WIL mod + TOU mod))/100 = {{system.hpRegen.rate}} per turn">
+            <label>HP Regen</label>
+            <span class="stat-value">{{system.hpRegen.rate}} HP/turn</span>
+          </div>
+
+          <div class="derived-stat" title="Cooldown reduction: {{system.cooldownReduction.reductionPercent}}% (max 80% at WIL 32, min 5 rounds)">
+            <label>Cooldown Reduction</label>
+            <span class="stat-value">{{system.cooldownReduction.reductionPercent}}%</span>
+          </div>
+
+          {{#if system.movement.speedBonus}}
+          <div class="derived-stat" title="Movement speed bonus from mutations">
+            <label>Movement Speed Bonus</label>
+            <span class="stat-value">+{{system.movement.speedBonus}}%</span>
+          </div>
+          {{/if}}
+        </div>
+      </div>
+
+    </div>
+
+    {{!-- Equipment Tab --}}
+    <div class="tab equipment" data-group="primary" data-tab="equipment">
+
+      {{!-- Body Parts Tree --}}
+      <div class="body-parts-section">
+        <h3 class="section-title">═══ BODY & EQUIPMENT ═══</h3>
+
+        <div class="body-parts-tree">
+          {{#each bodyPartsFlat as |bpItem|}}
+          <div class="body-part-row {{#if bpItem.part.chimeraOrigin}}chimera-part{{/if}}" data-part-id="{{bpItem.part.id}}" style="padding-left: {{bpItem.indent}}px;">
+
+            <div class="body-part-info">
+              <span class="body-part-icon">{{#if bpItem.hasChildren}}▼{{else}}•{{/if}}</span>
+              <span class="body-part-name">{{bpItem.displayName}}</span>
+              <span class="body-part-type">({{bpItem.part.type}})</span>
+              {{#if (gt bpItem.part.naturalArmor.av 0)}}
+                <span class="natural-armor-badge" title="Natural armor from {{bpItem.part.naturalArmor.source}}">🛡️ AV {{bpItem.part.naturalArmor.av}}</span>
+              {{/if}}
+              {{#if (and (eq bpItem.part.type "Back") bpItem.part.hasWings)}}
+                <span class="wings-badge" title="Flight capable - can fly at walking speed">🪽 Flight</span>
+              {{/if}}
+              {{#if bpItem.part.chimeraOrigin}}
+                <span class="chimera-badge" title="Grown from Chimera mutation">🧬</span>
+              {{/if}}
+            </div>
+
+            {{!-- Natural Weapons (F005) --}}
+            {{#if bpItem.naturalWeapon}}
+            <div class="body-part-equipment">
+              <div class="equipped-item natural-weapon-item">
+                <span class="item-name">{{bpItem.naturalWeapon.name}} (Natural)</span>
+                <span class="item-stat">{{bpItem.naturalWeapon.system.damage}}</span>
+                <button class="set-main-hand {{#if bpItem.isMainHand}}active{{/if}}" data-part-id="{{bpItem.part.id}}" title="{{#if bpItem.isMainHand}}Main Hand (Primary){{else}}Set as Main Hand{{/if}}">
+                  {{#if bpItem.isMainHand}}
+                    <i class="fas fa-star"></i>
+                  {{else}}
+                    <i class="far fa-star"></i>
+                  {{/if}}
+                </button>
+                <button class="attack-button" data-body-part-id="{{bpItem.part.id}}" data-weapon-id="{{bpItem.naturalWeapon.id}}" title="Attack with natural weapon">
+                  <i class="fas fa-fist-raised"></i> Attack
+                </button>
+              </div>
+            </div>
+            {{else if bpItem.canEquip}}
+            <div class="body-part-equipment">
+              {{#if bpItem.equippedItem}}
+                <div class="equipped-item">
+                  <img src="{{bpItem.equippedItem.img}}" width="20" height="20" title="{{bpItem.equippedItem.name}}"/>
+                  <span class="item-name">{{bpItem.equippedItem.name}}</span>
+                  {{#if (eq bpItem.equippedItem.type "armor")}}
+                    <span class="item-stat">AV: {{bpItem.equippedItem.system.av}}</span>
+                  {{/if}}
+                  {{#if (eq bpItem.equippedItem.type "weapon")}}
+                    <span class="item-stat">{{bpItem.equippedItem.system.damage}}</span>
+                    {{#if bpItem.canWield}}
+                      <button class="set-main-hand {{#if bpItem.isMainHand}}active{{/if}}" data-part-id="{{bpItem.part.id}}" title="{{#if bpItem.isMainHand}}Main Hand (Primary){{else}}Set as Main Hand{{/if}}">
+                        {{#if bpItem.isMainHand}}
+                          <i class="fas fa-star"></i>
+                        {{else}}
+                          <i class="far fa-star"></i>
+                        {{/if}}
+                      </button>
+                      <button class="attack-button" data-body-part-id="{{bpItem.part.id}}" data-weapon-id="{{bpItem.equippedItem._id}}" title="Attack with this weapon">
+                        <i class="fas fa-fist-raised"></i> Attack
+                      </button>
+                    {{/if}}
+                  {{/if}}
+                  <a class="item-control item-unequip" data-part-id="{{bpItem.part.id}}" title="Unequip">
+                    <i class="fas fa-times"></i>
+                  </a>
+                </div>
+              {{else}}
+                {{#if (or bpItem.armorBlocked bpItem.weaponBlocked)}}
+                  <span class="blocked-equipment">[Equipment blocked by mutation]</span>
+                {{else}}
+                  <select class="equipment-select" data-part-id="{{bpItem.part.id}}" data-can-wield="{{bpItem.canWield}}">
+                    <option value="">[empty]</option>
+                  </select>
+                {{/if}}
+              {{/if}}
+            </div>
+            {{/if}}
+
+          </div>
+          {{/each}}
+        </div>
+      </div>
+
+      {{!-- Inventory Section --}}
+      <div class="inventory-section">
+        <h3 class="section-title">═══ INVENTORY ═══</h3>
+
+        {{!-- Armor --}}
+        <div class="items-list">
+          <h4>Armor <a class="item-create" data-type="armor"><i class="fas fa-plus"></i></a></h4>
+          {{#each items as |item|}}
+            {{#if (eq item.type "armor")}}
+            <div class="item-row" data-item-id="{{item._id}}">
+              <img src="{{item.img}}" width="20" height="20"/>
+              <span class="item-name">{{item.name}}</span>
+              <span class="item-stat">AV: {{item.system.av}}</span>
+              <span class="item-stat">Slot: {{item.system.slot}}</span>
+              <a class="item-control item-edit"><i class="fas fa-edit"></i></a>
+              <a class="item-control item-delete"><i class="fas fa-trash"></i></a>
+            </div>
+            {{/if}}
+          {{/each}}
+        </div>
+
+        {{!-- Weapons --}}
+        <div class="items-list">
+          <h4>Weapons <a class="item-create" data-type="weapon"><i class="fas fa-plus"></i></a></h4>
+          {{#each items as |item|}}
+            {{#if (eq item.type "weapon")}}
+            <div class="item-row" data-item-id="{{item._id}}">
+              <img src="{{item.img}}" width="20" height="20"/>
+              <span class="item-name">{{item.name}}</span>
+              <span class="item-stat">{{item.system.damage}}</span>
+              <span class="item-stat">PV: {{item.system.pv}}</span>
+              <a class="item-control item-edit"><i class="fas fa-edit"></i></a>
+              <a class="item-control item-delete"><i class="fas fa-trash"></i></a>
+            </div>
+            {{/if}}
+          {{/each}}
+        </div>
+      </div>
+
+    </div>
+
+    {{!-- Abilities Tab --}}
+    <div class="tab abilities" data-group="primary" data-tab="abilities">
+
+      {{!-- Mutations --}}
+      <div class="mutations-section">
+        <h3 class="section-title">═══ MUTATIONS ═══</h3>
+
+        <div class="items-list">
+          <h4>Physical Mutations <a class="item-create" data-type="mutation"><i class="fas fa-plus"></i></a></h4>
+          {{#each items as |item|}}
+            {{#if (and (eq item.type "mutation") (eq item.system.mutationType "physical"))}}
+            <div class="item-row mutation-row" data-item-id="{{item._id}}">
+              <img src="{{item.img}}" width="20" height="20"/>
+              <span class="item-name">{{item.name}}</span>
+              <span class="item-stat">MP: {{item.system.mpCost}}</span>
+              {{#if item.system.isActive}}
+                <span class="mutation-active">ACTIVE</span>
+              {{/if}}
+              <a class="item-control item-edit"><i class="fas fa-edit"></i></a>
+              <a class="item-control item-delete"><i class="fas fa-trash"></i></a>
+            </div>
+            {{/if}}
+          {{/each}}
+        </div>
+
+      </div>
+
+    </div>
+
+    {{!-- Biography Tab --}}
+    <div class="tab biography" data-group="primary" data-tab="biography">
+      {{editor system.biography target="system.biography" button=true owner=owner editable=editable}}
+    </div>
+
+    {{!-- Developer Tab (GM Only) --}}
+    {{#if isGM}}
+    <div class="tab developer" data-group="primary" data-tab="developer">
+      <h3 class="section-title">═══ DEVELOPER TOOLS ═══</h3>
+      <p class="dev-intro">GM-only tools for testing and content creation. Hidden from players.</p>
+
+      {{!-- Data Inspector Panel --}}
+      {{#if inspectorRawData}}
+        <details class="dev-panel" open>
+          <summary><i class="fas fa-search"></i> Data Inspector</summary>
+          <div class="dev-panel-content">
+
+            <h4>Raw System Data</h4>
+            <pre class="dev-code">{{inspectorRawData}}</pre>
+
+            <h4>Calculated Values</h4>
+            {{#each inspectorCalculations}}
+              <div class="calc-category">
+                <h5>{{category}}</h5>
+                <table class="dev-table">
+                  <thead>
+                    <tr>
+                      <th>Stat</th>
+                      <th>Value</th>
+                      <th>Formula</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each stats}}
+                      <tr>
+                        <td><strong>{{label}}</strong></td>
+                        <td>{{value}}{{#if modifier}} ({{#if (gt modifier 0)}}+{{/if}}{{modifier}}){{/if}}</td>
+                        <td class="formula">{{formula}}</td>
+                      </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
+            {{/each}}
+
+            {{#if inspectorMutations.length}}
+              <h4>Active Mutations</h4>
+              <table class="dev-table">
+                <thead>
+                  <tr>
+                    <th>Mutation</th>
+                    <th>Level</th>
+                    <th>Effects</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each inspectorMutations}}
+                    <tr>
+                      <td><strong>{{name}}</strong></td>
+                      <td>{{level}}</td>
+                      <td>
+                        {{#if hasNaturalWeapon}}🗡️ Natural Weapon{{/if}}
+                        {{#if providesArmor}}🛡️ Armor{{/if}}
+                        {{#if blocksEquipment}}🚫 Blocks Equipment{{/if}}
+                        {{#if bodyPartsAdded}}➕ {{bodyPartsAdded}} body parts{{/if}}
+                      </td>
+                    </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            {{/if}}
+
+          </div>
+        </details>
+      {{/if}}
+
+    </div>
+    {{/if}}
+
+  </section>
+</form>
