@@ -223,6 +223,39 @@ export function getWieldingBodyParts(bodyParts) {
 }
 
 /**
+ * Replace an existing body part with a new one
+ * @param {Object} bodyParts - Body parts object
+ * @param {string} targetId - ID of the body part to replace
+ * @param {string} newType - New body part type
+ * @param {string} variant - Variant name (optional)
+ * @param {string} laterality - Laterality (optional)
+ * @returns {Object} New body part
+ */
+export function replaceBodyPart(bodyParts, targetId, newType, variant = null, laterality = "") {
+  const targetPart = bodyParts[targetId];
+  if (!targetPart) {
+    console.error(`Target body part not found: ${targetId}`);
+    return null;
+  }
+
+  // Create new body part
+  const newPart = createBodyPart(newType, variant, laterality, targetPart.parent);
+  bodyParts[newPart.id] = newPart;
+
+  // Update parent's children
+  const parent = bodyParts[targetPart.parent];
+  if (parent) {
+    parent.children = parent.children.filter(id => id !== targetId);
+    parent.children.push(newPart.id);
+  }
+
+  // Remove the old part
+  delete bodyParts[targetId];
+
+  return newPart;
+}
+
+/**
  * Add a new body part as a child of another
  * @param {Object} bodyParts - Body parts object
  * @param {string} type - Body part type

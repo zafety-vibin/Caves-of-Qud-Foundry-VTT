@@ -10,6 +10,7 @@ import {
   createHumanoidBody,
   addBodyPart,
   removeBodyPart,
+  replaceBodyPart,
   getBodyPartsByType,
   getEquippableBodyParts,
   getWieldingBodyParts,
@@ -812,6 +813,7 @@ export default class CavesOfQudActor extends Actor {
     const modifications = mutationItem.system.bodyModifications || [];
     const allAddedIds = [];
     const replacedParts = []; // Track replaced parts for restoration on removal
+    const createdItemIds = []; // Track any created weapon items (e.g., burrowing claws)
 
     for (let mod of modifications) {
       // Handle 'replace' action (e.g., Hand → BurrowingClaw)
@@ -830,6 +832,40 @@ export default class CavesOfQudActor extends Actor {
             // Preserve equipment if specified
             if (!mod.preserveEquipment) {
               part.equipment = null;
+            }
+
+            // If this mutation requests creating a replacement weapon (e.g., Burrowing Claws),
+            // create a weapon item for empty hands and equip it to that part.
+            // Control via mutation item flag: system.createWeaponOnReplace = true
+            const createWeapon = !!mutationItem.system.createWeaponOnReplace;
+            if (createWeapon && !part.equipment) {
+              // Build weapon data (uses config helper for damage scaling)
+              const level = mutationItem.system.level || 1;
+              const damage = CAVESOFQUD.getNaturalWeaponDamage('BurrowingClaws', level) || "1d2-1";
+
+              const weaponData = {
+                name: `${mutationItem.name}`,
+                type: 'weapon',
+                img: mutationItem.img || "icons/weapons/claws/claw-bear-paw-swipe.webp",
+                system: {
+                  damage: damage,
+                  pv: 0,
+                  weaponType: "melee",
+                  slot: "hand",
+                  quantity: 1,
+                  equipped: true
+                }
+              };
+
+              // Create the weapon as an embedded item on this actor
+              const created = await this.createEmbeddedDocuments('Item', [weaponData]);
+              if (created && created[0]) {
+                const createdId = created[0].id;
+                createdItemIds.push(createdId);
+
+                // Equip the created weapon on the replaced part
+                part.equipment = createdId;
+              }
             }
 
             allAddedIds.push(partId); // Track as "added" for removal later
@@ -897,9 +933,10 @@ export default class CavesOfQudActor extends Actor {
       }
     }
 
-    // Track added parts in mutation item
+    // Track added parts and created items in mutation item
     await mutationItem.update({
       'system.addedBodyParts': allAddedIds,
+      'system.createdItems': createdItemIds,
       'system.isActive': true
     });
 
@@ -925,6 +962,7 @@ export default class CavesOfQudActor extends Actor {
     }
 
     const addedParts = mutationItem.system.addedBodyParts || [];
+    const createdItems = mutationItem.system.createdItems || [];
     const allRemovedIds = [];
     const modifications = mutationItem.system.bodyModifications || [];
 
@@ -957,9 +995,19 @@ export default class CavesOfQudActor extends Actor {
       }
     }
 
+    // Remove any items that were created when the mutation applied (e.g., burrowing claw weapons)
+    if (createdItems && createdItems.length > 0) {
+      try {
+        await this.deleteEmbeddedDocuments('Item', createdItems);
+      } catch (err) {
+        console.warn("Failed to delete created mutation items:", err);
+      }
+    }
+
     // Clear tracking in mutation item
     await mutationItem.update({
       'system.addedBodyParts': [],
+      'system.createdItems': [],
       'system.isActive': false
     });
 
