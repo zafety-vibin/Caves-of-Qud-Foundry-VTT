@@ -26,7 +26,7 @@ if (!pack) {
 let item = await Item.create({
   name: "Multiple Arms",
   type: "mutation",
-  img: "icons/magic/nature/root-vine-caduceus-green.webp",
+  img: "systems/cavesofqud/assets/icons/physicalmutations/Multiple_arms_mutation.png",
   system: {
     mutationType: "physical",
     mpCost: 4,
@@ -62,7 +62,7 @@ await item.delete();
 item = await Item.create({
   name: "Multiple Legs",
   type: "mutation",
-  img: "icons/magic/nature/elemental-plant-humanoid.webp",
+  img: "systems/cavesofqud/assets/icons/physicalmutations/Multiple_legs_mutation.png",
   system: {
     mutationType: "physical",
     mpCost: 5,
@@ -95,7 +95,7 @@ await item.delete();
 item = await Item.create({
   name: "Two-headed",
   type: "mutation",
-  img: "icons/magic/control/hypnosis-mesmerism-eye.webp",
+  img: "systems/cavesofqud/assets/icons/physicalmutations/twoheaded_mutation.png",
   system: {
     mutationType: "physical",
     mpCost: 3,
@@ -123,7 +123,7 @@ await item.delete();
 item = await Item.create({
   name: "Chimera",
   type: "mutation",
-  img: "icons/magic/nature/strike-body-explode-disintegrate.webp",
+  img: "systems/cavesofqud/assets/icons/physicalmutations/chimera_mutation.png",
   system: {
     mutationType: "physical",
     mpCost: 0,
@@ -152,7 +152,7 @@ await item.delete();
 item = await Item.create({
   name: "Burrowing Claws",
   type: "mutation",
-  img: "icons/weapons/claws/claw-bear-paw-swipe.webp",
+  img: "systems/cavesofqud/assets/icons/physicalmutations/Burrowing_claws_mutation.png",
   system: {
     mutationType: "physical",
     mpCost: 3,
@@ -201,7 +201,7 @@ await item.delete();
 item = await Item.create({
   name: "Horns",
   type: "mutation",
-  img: "icons/commodities/bones/horn-hollow-white.webp",
+  img: "systems/cavesofqud/assets/icons/physicalmutations/horns_mutation.png",
   system: {
     mutationType: "physical",
     mpCost: 4,
@@ -242,7 +242,7 @@ await item.delete();
 item = await Item.create({
   name: "Stinger (Paralyzing Venom)",
   type: "mutation",
-  img: "icons/magic/death/skull-poison-green.webp",
+  img: "systems/cavesofqud/assets/icons/physicalmutations/stinger_mutation.png",
   system: {
     mutationType: "physical",
     mpCost: 4,
@@ -292,7 +292,7 @@ await item.delete();
 item = await Item.create({
   name: "Stinger (Confusing Venom)",
   type: "mutation",
-  img: "icons/magic/unholy/strike-beam-blood-red-purple.webp",
+  img: "systems/cavesofqud/assets/icons/physicalmutations/stinger_mutation.png",
   system: {
     mutationType: "physical",
     mpCost: 4,
@@ -342,7 +342,7 @@ await item.delete();
 item = await Item.create({
   name: "Stinger (Poisoning Venom)",
   type: "mutation",
-  img: "icons/magic/death/skull-poison-yellow.webp",
+  img: "systems/cavesofqud/assets/icons/physicalmutations/stinger_mutation.png",
   system: {
     mutationType: "physical",
     mpCost: 4,
@@ -392,7 +392,7 @@ await item.delete();
 item = await Item.create({
   name: "Quills",
   type: "mutation",
-  img: "icons/magic/defensive/shield-barrier-spikes-brown.webp",
+  img: "systems/cavesofqud/assets/icons/physicalmutations/Quills_mutation.png",
   system: {
     mutationType: "physical",
     mpCost: 4,
@@ -433,7 +433,7 @@ await item.delete();
 item = await Item.create({
   name: "Wings",
   type: "mutation",
-  img: "icons/magic/movement/wings-glowing-purple.webp",
+  img: "systems/cavesofqud/assets/icons/physicalmutations/wings_mutation.png",
   system: {
     mutationType: "physical",
     mpCost: 4,
